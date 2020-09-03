@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :require_user_logged_in
   
   def index
   end
@@ -15,7 +16,7 @@ class UsersController < ApplicationController
     
     if @user.save
       flash[:success] = 'ユーザを登録しました。'
-      root_url root_url
+      root_url @user
     else
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       render :new
